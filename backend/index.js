@@ -1,12 +1,18 @@
 const express = require('express');
+const { initalDBSetup } = require('./db/db');
+import enquiryRouter from './routes/enquires';
+import productRouter from './routes/products';
+import userRouter from './routes/user';
+
 const app = express();
+
 app.use(express.json());
 
-app.get('/api/products', (req, res) => {
-    const { search, category, page = 1, limit = 10 } = req.query;
-    // Construct SQL query with params for search/filter/pagination
-    // Execute query using db driver, e.g., db.all(query, params, (err, rows) => {...})
-    res.json({ products: /* results */ });
-});
+initalDBSetup()
+app.use('/api/products', productRouter);
+app.use('/api/enquire', enquiryRouter)
+app.use('/api/user', userRouter)
+
+app.get('/', (req, res) => res.send("API running..."))
 
 app.listen(process.env.PORT || 3001);
