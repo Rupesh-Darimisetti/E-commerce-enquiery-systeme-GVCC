@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import ProductDetailsModal from './components/ProductDetailsModal';
+import ProductList from './components/ProductList';
 
-function App() {
+export default function App() {
+  const [selectedProductId, setSelectedProductId] = useState(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="app">
+      <header className="site-header">
+        <h1>Product Showcase</h1>
       </header>
+      <main>
+        <ProductList onViewDetails={id => setSelectedProductId(id)} />
+      </main>
+      {selectedProductId && <ProductDetailsModal productId={selectedProductId} onClose={() => setSelectedProductId(null)} />}
+      <footer className="site-footer">© Product Showcase</footer>
     </div>
   );
 }
-
-export default App;

@@ -1,6 +1,6 @@
 import express from 'express';
-import userConroller from '../controller/userController';
-import { initalDBSetup } from '../db/db';
+import userConroller from '../controller/userController.js';
+import { initalDBSetup } from '../db/db.js';
 const userRouter = express.Router()
 
 initalDBSetup()

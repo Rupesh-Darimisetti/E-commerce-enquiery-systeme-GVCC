@@ -1,0 +1,29 @@
+-- database: data.sqlite
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE IF NOT EXISTS
+    products (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        category TEXT NOT NULL,
+        short_desc TEXT,
+        long_desc TEXT,
+        price REAL NOT NULL,
+        image_url TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+
+CREATE INDEX IF NOT EXISTS idx_products_name ON products (name);
+
+CREATE INDEX IF NOT EXISTS idx_products_category ON products (category);
+
+CREATE TABLE IF NOT EXISTS
+    enquiries (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        product_id INTEGER REFERENCES products (id) ON DELETE SET NULL,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        phone TEXT,
+        message TEXT NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );

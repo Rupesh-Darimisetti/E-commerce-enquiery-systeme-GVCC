@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { initalDBSetup } from '../db/db';
+import { initalDBSetup } from '../db/db.js';
 
 initalDBSetup()
 
